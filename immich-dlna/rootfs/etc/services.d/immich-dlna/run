@@ -18,7 +18,7 @@ IMMICH_DLNA_HTTP_PORT="$(bashio::config 'http_port')"
 
 # Ensure externally reachable media URLs for DLNA clients.
 # If not explicitly provided, derive base URL from the first non-loopback IPv4.
-if ! bashio::env.exists 'IMMICH_DLNA_BASE_URL'; then
+if [ -z "${IMMICH_DLNA_BASE_URL:-}" ]; then
   detected_ip="$(hostname -I 2>/dev/null | awk '{for(i=1;i<=NF;i++) if ($i !~ /^127\./) {print $i; exit}}')"
   if [ -n "${detected_ip}" ]; then
     export IMMICH_DLNA_BASE_URL

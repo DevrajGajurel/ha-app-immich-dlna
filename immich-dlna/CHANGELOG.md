@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.7
+
+- Replace unavailable `bashio::env.exists` call with a portable shell environment check in the add-on startup script.
+- Fix startup crash loop caused by `command not found` in Home Assistant base images.
+
 ## 0.1.6
 
 - Auto-detect a non-loopback host IP and set `IMMICH_DLNA_BASE_URL` at startup when not provided.
