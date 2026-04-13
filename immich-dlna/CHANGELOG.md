@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.11
+
+- Consolidate venv install into one `RUN` using `/opt/venv/bin/pip` only (no system `pip3`), avoiding PEP 668 failures and stale layer caches when updating from 0.1.9.
+
 ## 0.1.10
 
 - Fix Docker build on Home Assistant base images: install `immich-dlna` into `/opt/venv` to satisfy PEP 668 (externally managed system Python).
