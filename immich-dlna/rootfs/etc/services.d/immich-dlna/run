@@ -8,52 +8,12 @@ export IMMICH_API_TOKEN
 IMMICH_API_TOKEN="$(bashio::config 'immich_api_token')"
 
 export IMMICH_VERIFY_SSL
-IMMICH_VERIFY_SSL="$(bashio::config 'immich_verify_ssl')"
+IMMICH_VERIFY_SSL="${IMMICH_VERIFY_SSL:-true}"
 
 export IMMICH_DLNA_HTTP_HOST
-IMMICH_DLNA_HTTP_HOST="$(bashio::config 'http_host')"
+IMMICH_DLNA_HTTP_HOST="${IMMICH_DLNA_HTTP_HOST:-0.0.0.0}"
 
 export IMMICH_DLNA_HTTP_PORT
 IMMICH_DLNA_HTTP_PORT="$(bashio::config 'http_port')"
-
-if bashio::config.has_value 'base_url'; then
-  export IMMICH_DLNA_BASE_URL
-  IMMICH_DLNA_BASE_URL="$(bashio::config 'base_url')"
-fi
-
-export IMMICH_DLNA_FRIENDLY_NAME
-IMMICH_DLNA_FRIENDLY_NAME="$(bashio::config 'friendly_name')"
-
-if bashio::config.has_value 'server_uuid'; then
-  export IMMICH_DLNA_SERVER_UUID
-  IMMICH_DLNA_SERVER_UUID="$(bashio::config 'server_uuid')"
-fi
-
-export IMMICH_DLNA_LOG_LEVEL
-IMMICH_DLNA_LOG_LEVEL="$(bashio::config 'log_level')"
-
-export IMMICH_DLNA_SSDP_MULTICAST_HOST
-IMMICH_DLNA_SSDP_MULTICAST_HOST="$(bashio::config 'ssdp_multicast_host')"
-
-export IMMICH_DLNA_SSDP_PORT
-IMMICH_DLNA_SSDP_PORT="$(bashio::config 'ssdp_port')"
-
-export IMMICH_DLNA_SSDP_MAX_AGE
-IMMICH_DLNA_SSDP_MAX_AGE="$(bashio::config 'ssdp_max_age')"
-
-export IMMICH_DLNA_SSDP_NOTIFY_INTERVAL
-IMMICH_DLNA_SSDP_NOTIFY_INTERVAL="$(bashio::config 'ssdp_notify_interval')"
-
-export IMMICH_DLNA_IMMICH_TIMEOUT_SECONDS
-IMMICH_DLNA_IMMICH_TIMEOUT_SECONDS="$(bashio::config 'immich_timeout_seconds')"
-
-export IMMICH_DLNA_METADATA_CACHE_TTL_SECONDS
-IMMICH_DLNA_METADATA_CACHE_TTL_SECONDS="$(bashio::config 'metadata_cache_ttl_seconds')"
-
-export IMMICH_DLNA_METADATA_CACHE_MAX_ENTRIES
-IMMICH_DLNA_METADATA_CACHE_MAX_ENTRIES="$(bashio::config 'metadata_cache_max_entries')"
-
-export IMMICH_DLNA_IMMICH_MAX_CONCURRENT_REQUESTS
-IMMICH_DLNA_IMMICH_MAX_CONCURRENT_REQUESTS="$(bashio::config 'immich_max_concurrent_requests')"
 
 exec immich-dlna

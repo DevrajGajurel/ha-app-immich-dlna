@@ -6,8 +6,9 @@ Run Immich-DLNA inside Home Assistant so DLNA clients can browse and play media 
 
 - `immich_url`
 - `immich_api_token`
+- `http_port` (defaults to `8200`)
 
 ## Notes
 
 - This add-on uses `host_network: true`, which is recommended for DLNA/SSDP discovery.
-- If your Immich uses self-signed certificates, set `immich_verify_ssl` to `false`.
+- Most advanced DLNA settings use safe internal defaults to keep setup simple.
