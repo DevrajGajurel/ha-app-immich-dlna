@@ -31,6 +31,24 @@ class ContentCatalog:
         self.logger = logging.getLogger("immich_dlna.catalog")
         self._asset_parent_cache: dict[str, str] = {}
 
+    async def log_exposed_content_summary(self) -> None:
+        """Log a concise summary of content exposed over DLNA."""
+        try:
+            albums = await self.immich_client.list_albums()
+            timeline_refs = await self.immich_client.list_timeline_asset_refs()
+        except ImmichError as error:
+            self.logger.error("Failed to build DLNA content summary: %s", error)
+            return
+
+        self.logger.info("DLNA root containers exposed: Timeline, Albums")
+        self.logger.info("DLNA timeline assets exposed: %s", len(timeline_refs))
+        self.logger.info("DLNA albums exposed: %s", len(albums))
+        if albums:
+            album_names = ", ".join(sorted(album.name for album in albums))
+            self.logger.info("DLNA album names: %s", album_names)
+        else:
+            self.logger.info("DLNA album names: (none)")
+
     async def browse(
         self,
         object_id: str,

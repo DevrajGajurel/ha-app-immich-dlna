@@ -41,6 +41,7 @@ async def run_server(settings: Settings) -> None:
     async def on_startup(_app: web.Application) -> None:
         await immich_client.start()
         logger.info("Immich client started")
+        await catalog.log_exposed_content_summary()
         await ssdp_server.start()
         logger.info("SSDP started")
 

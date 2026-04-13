@@ -126,7 +126,7 @@ class SsdpServer:
         if not search_target:
             return
 
-        self.logger.info("M-SEARCH received from %s st=%s", addr[0], search_target)
+        self.logger.debug("M-SEARCH received from %s st=%s", addr[0], search_target)
         self.metrics.mark_device_seen(addr[0])
         location = self._location_for_destination(addr[0])
 
@@ -138,7 +138,7 @@ class SsdpServer:
                     location=location,
                 )
                 self._send_datagram(response, addr)
-                self.logger.info(
+                self.logger.debug(
                     "M-SEARCH response sent to %s:%s st=%s location=%s",
                     addr[0],
                     addr[1],
@@ -156,7 +156,7 @@ class SsdpServer:
                 location=location,
             )
             self._send_datagram(response, addr)
-            self.logger.info(
+            self.logger.debug(
                 "M-SEARCH response sent to %s:%s st=%s location=%s",
                 addr[0],
                 addr[1],
