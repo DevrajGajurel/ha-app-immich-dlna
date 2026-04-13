@@ -19,7 +19,26 @@ IMMICH_DLNA_HTTP_PORT="$(bashio::config 'http_port')"
 # Ensure externally reachable media URLs for DLNA clients.
 # If not explicitly provided, derive base URL from the first non-loopback IPv4.
 if [ -z "${IMMICH_DLNA_BASE_URL:-}" ]; then
-  detected_ip="$(hostname -I 2>/dev/null | awk '{for(i=1;i<=NF;i++) if ($i !~ /^127\./) {print $i; exit}}')"
+  detected_ip=""
+
+  # Prefer route-based IP detection when available.
+  if command -v ip >/dev/null 2>&1; then
+    detected_ip="$(
+      ip -4 route get 1.1.1.1 2>/dev/null \
+        | awk '{for(i=1;i<=NF;i++) if ($i=="src") {print $(i+1); exit}}' \
+        || true
+    )"
+  fi
+
+  # Fallback for environments where `ip` is unavailable.
+  if [ -z "${detected_ip}" ]; then
+    detected_ip="$(
+      hostname -I 2>/dev/null \
+        | awk '{for(i=1;i<=NF;i++) if ($i !~ /^127\./) {print $i; exit}}' \
+        || true
+    )"
+  fi
+
   if [ -n "${detected_ip}" ]; then
     export IMMICH_DLNA_BASE_URL
     IMMICH_DLNA_BASE_URL="http://${detected_ip}:${IMMICH_DLNA_HTTP_PORT}"

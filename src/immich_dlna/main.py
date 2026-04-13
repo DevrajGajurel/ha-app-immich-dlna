@@ -85,6 +85,15 @@ def main() -> None:
     settings = Settings.from_env()
     configure_logging(settings.log_level)
     logger = logging.getLogger("immich_dlna.main")
+    logger.info(
+        "Effective config immich_url=%s immich_api_token=%s verify_ssl=%s base_url=%s http_host=%s http_port=%s",
+        settings.immich_url,
+        settings.immich_api_token,
+        settings.immich_verify_ssl,
+        settings.base_url,
+        settings.http_host,
+        settings.http_port,
+    )
     if args.check_config:
         logger.info(
             "Configuration valid. base_url=%s server_uuid=%s",

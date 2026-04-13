@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.8
+
+- Harden DLNA base URL auto-detection to avoid startup failure when specific network commands are unavailable.
+- Add route-based IP detection with safe fallbacks so the add-on always starts and still advertises reachable media URLs.
+
 ## 0.1.7
 
 - Replace unavailable `bashio::env.exists` call with a portable shell environment check in the add-on startup script.
