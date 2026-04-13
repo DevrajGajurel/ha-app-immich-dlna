@@ -1,0 +1,52 @@
+name: Immich DLNA
+version: "0.1.0"
+slug: immich_dlna
+description: Expose Immich as a DLNA/UPnP media server
+url: https://github.com/YOUR_GITHUB_USERNAME/immich-dlna-home-assistant-addon
+startup: services
+boot: auto
+init: false
+host_network: true
+arch:
+  - aarch64
+  - amd64
+  - armv7
+  - i386
+ports: {}
+ports_description: {}
+options:
+  immich_url: ""
+  immich_api_token: ""
+  immich_verify_ssl: true
+  http_host: 0.0.0.0
+  http_port: 8200
+  base_url: ""
+  friendly_name: Immich DLNA
+  server_uuid: ""
+  log_level: INFO
+  ssdp_multicast_host: 239.255.255.250
+  ssdp_port: 1900
+  ssdp_max_age: 1800
+  ssdp_notify_interval: 900
+  immich_timeout_seconds: 20
+  metadata_cache_ttl_seconds: 30
+  metadata_cache_max_entries: 2000
+  immich_max_concurrent_requests: 16
+schema:
+  immich_url: str
+  immich_api_token: password
+  immich_verify_ssl: bool
+  http_host: str
+  http_port: int
+  base_url: str?
+  friendly_name: str
+  server_uuid: str?
+  log_level: list(DEBUG|INFO|WARNING|ERROR|CRITICAL)
+  ssdp_multicast_host: str
+  ssdp_port: int
+  ssdp_max_age: int
+  ssdp_notify_interval: int
+  immich_timeout_seconds: int
+  metadata_cache_ttl_seconds: int
+  metadata_cache_max_entries: int
+  immich_max_concurrent_requests: int
