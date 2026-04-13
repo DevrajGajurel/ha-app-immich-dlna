@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "immich-dlna"
-version = "0.1.4"
+version = "0.1.5"
 description = "DLNA/UPnP MediaServer skeleton for Immich"
 requires-python = ">=3.11"
 dependencies = ["aiohttp>=3.10,<4", "prometheus-client>=0.20,<1"]

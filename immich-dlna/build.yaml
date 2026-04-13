@@ -6,3 +6,4 @@ build_from:
 args:
   APP_GIT_URL: https://github.com/DevrajGajurel/ha-app-immich-dlna.git
   APP_GIT_REF: main
+  APP_BUILD_VERSION: 0.1.5

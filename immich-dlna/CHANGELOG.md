@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.5
+
+- Add Docker build cache-busting argument (`APP_BUILD_VERSION`) to ensure updated source is reinstalled during add-on builds.
+- Bump add-on version to guarantee Home Assistant offers an in-place update path.
+
 ## 0.1.4
 
 - Reduce SSDP discovery log noise by moving per-request M-SEARCH logs to debug level.
