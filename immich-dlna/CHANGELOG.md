@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.6
+
+- Auto-detect a non-loopback host IP and set `IMMICH_DLNA_BASE_URL` at startup when not provided.
+- Fix media playback for DLNA clients by avoiding loopback (`127.0.0.1`) media URLs in Home Assistant add-on deployments.
+
 ## 0.1.5
 
 - Add Docker build cache-busting argument (`APP_BUILD_VERSION`) to ensure updated source is reinstalled during add-on builds.
