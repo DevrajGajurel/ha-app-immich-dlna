@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.4
+
+- Reduce SSDP discovery log noise by moving per-request M-SEARCH logs to debug level.
+- Add startup summary logs for DLNA-exposed content (timeline count, album count, album names).
+- Bump add-on version so Home Assistant can deliver in-place upgrades without uninstall/reinstall.
+
 ## 0.1.3
 
 - Simplify Home Assistant add-on configuration to only `immich_url`, `immich_api_token`, and `http_port` (default `8200`).
