@@ -1,8 +1,8 @@
-ARG BUILD_FROM=ghcr.io/hassio-addons/base:17.2.1
+ARG BUILD_FROM=ghcr.io/home-assistant/base:latest
 FROM ${BUILD_FROM}
 ARG APP_GIT_URL=https://github.com/DevrajGajurel/ha-app-immich-dlna.git
 ARG APP_GIT_REF=main
-ARG APP_BUILD_VERSION=dev
+ARG APP_BUILD_VERSION=0.1.9
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 

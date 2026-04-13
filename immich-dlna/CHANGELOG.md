@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.9
+
+- Remove deprecated `build.yaml` and keep build parameters directly in `Dockerfile` per current Home Assistant builder guidance.
+- Update add-on base image default to `ghcr.io/home-assistant/base:latest`.
+
 ## 0.1.8
 
 - Harden DLNA base URL auto-detection to avoid startup failure when specific network commands are unavailable.

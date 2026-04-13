@@ -6,7 +6,7 @@ Before publishing, replace placeholder GitHub values in:
 
 - `repository.yaml`
 - `immich-dlna/config.yaml` (`url`)
-- `immich-dlna/build.yaml` (`APP_GIT_URL`, `APP_GIT_REF`)
+- `immich-dlna/Dockerfile` (`APP_GIT_URL`, `APP_GIT_REF`)
 
 ## Add this repository to Home Assistant
 
