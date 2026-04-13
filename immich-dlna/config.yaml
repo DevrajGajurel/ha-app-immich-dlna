@@ -1,5 +1,5 @@
 name: Immich DLNA
-version: "0.1.9"
+version: "0.1.10"
 slug: immich_dlna
 description: Expose Immich as a DLNA/UPnP media server
 url: https://github.com/DevrajGajurel/ha-app-immich-dlna

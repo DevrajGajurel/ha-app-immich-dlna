@@ -45,4 +45,5 @@ if [ -z "${IMMICH_DLNA_BASE_URL:-}" ]; then
   fi
 fi
 
-exec immich-dlna
+# Use venv binary explicitly so s6 always finds the installed CLI even if PATH is minimal.
+exec /opt/venv/bin/immich-dlna

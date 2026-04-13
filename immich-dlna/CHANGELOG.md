@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.10
+
+- Fix Docker build on Home Assistant base images: install `immich-dlna` into `/opt/venv` to satisfy PEP 668 (externally managed system Python).
+- Run the service via `/opt/venv/bin/immich-dlna` so startup is reliable under s6.
+
 ## 0.1.9
 
 - Remove deprecated `build.yaml` and keep build parameters directly in `Dockerfile` per current Home Assistant builder guidance.
