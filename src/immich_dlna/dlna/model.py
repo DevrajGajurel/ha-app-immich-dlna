@@ -16,7 +16,7 @@ class Container:
     parent_id: str
     title: str
     upnp_class: str = CONTAINER_CLASS
-    child_count: int = 0
+    child_count: int = -1  # -1 = unknown; omitted from DIDL (Samsung TVs treat childCount="0" as empty)
     searchable: bool = True
     storage_used: int = -1
 

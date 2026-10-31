@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.14
+
+- Fix Samsung TVs showing Timeline/Albums as empty: stop advertising `childCount="0"` for folders with unknown size.
+- Advertise a DLNA profile (`JPEG_LRG`) for JPEG photos.
+
 ## 0.1.13
 
 - Fix empty albums (UI and DLNA clients): load album assets via Immich `/search/metadata` when `/albums/{id}` no longer embeds assets (Immich 2.x).

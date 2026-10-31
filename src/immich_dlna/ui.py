@@ -51,7 +51,7 @@ def _href(object_id: str, start: int = 0) -> str:
 def _tile(entry: Container | MediaItem) -> str:
     label = escape(entry.title)
     if isinstance(entry, Container):
-        count = f" ({entry.child_count})" if entry.child_count else ""
+        count = f" ({entry.child_count})" if entry.child_count > 0 else ""
         return (
             f"<a class='tile' href='{_href(entry.object_id)}'>"
             f"<div class='thumb'>&#128193;</div><div class='label'>{label}{count}</div></a>"

@@ -18,6 +18,8 @@ ET.register_namespace("dlna", DLNA_NS)
 def _protocol_info(item: MediaItem) -> str:
     if item.is_video:
         return f"http-get:*:{item.mime_type}:DLNA.ORG_OP=01;DLNA.ORG_CI=0"
+    if item.mime_type.lower() == "image/jpeg":
+        return f"http-get:*:image/jpeg:DLNA.ORG_PN=JPEG_LRG;DLNA.ORG_OP=01;DLNA.ORG_CI=0;DLNA.ORG_FLAGS=00D00000000000000000000000000000"
     return f"http-get:*:{item.mime_type}:*"
 
 
@@ -33,9 +35,10 @@ def render_entries(entries: list[BrowseEntry]) -> str:
                     "parentID": entry.parent_id,
                     "restricted": "1",
                     "searchable": "1" if entry.searchable else "0",
-                    "childCount": str(entry.child_count),
                 },
             )
+            if entry.child_count >= 0:
+                container_element.set("childCount", str(entry.child_count))
             title = ET.SubElement(container_element, f"{{{DC_NS}}}title")
             title.text = entry.title
             upnp_class = ET.SubElement(container_element, f"{{{UPNP_NS}}}class")
