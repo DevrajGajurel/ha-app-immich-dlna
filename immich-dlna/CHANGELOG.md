@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.12
+
+- Add a browsable web UI (Timeline / Albums, the same tree DLNA clients see) in the Home Assistant sidebar via ingress.
+- Ingress uses port 8200; keep `http_port` at 8200 for the sidebar panel to work.
+
 ## 0.1.11
 
 - Consolidate venv install into one `RUN` using `/opt/venv/bin/pip` only (no system `pip3`), avoiding PEP 668 failures and stale layer caches when updating from 0.1.9.

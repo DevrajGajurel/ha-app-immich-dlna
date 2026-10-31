@@ -14,6 +14,7 @@ from immich_dlna.dlna.scpd import CONNECTION_MANAGER_SCPD, CONTENT_DIRECTORY_SCP
 from immich_dlna.dlna.soap import extract_action_from_soap_header, parse_action_request
 from immich_dlna.immich import ImmichClient, ImmichError
 from immich_dlna.metrics import MetricsRegistry
+from immich_dlna.ui import register_ui
 
 
 def _soap_response(status_code: int, payload: str) -> web.Response:
@@ -236,4 +237,5 @@ def create_app(
     app.router.add_route("*", "/ConnectionManager/event", event_subscription)
     app.router.add_get("/media/asset/{asset_id}", media_asset)
     app.router.add_get("/media/asset/{asset_id}/thumbnail", media_asset_thumbnail)
+    register_ui(app, content_directory_service.catalog, settings.friendly_name)
     return app

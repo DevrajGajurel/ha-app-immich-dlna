@@ -3,7 +3,7 @@ FROM ${BUILD_FROM}
 ARG APP_GIT_URL=https://github.com/DevrajGajurel/ha-app-immich-dlna.git
 ARG APP_GIT_REF=main
 # Bump when you need to invalidate Docker layer cache on build hosts (e.g. after PEP 668 / install fixes).
-ARG APP_BUILD_VERSION=0.1.11
+ARG APP_BUILD_VERSION=0.1.12
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
