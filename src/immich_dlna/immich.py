@@ -202,7 +202,10 @@ class ImmichClient:
             return cached
 
         payload = await self._request_json(f"/albums/{album_id}", params={"withoutAssets": "false"})
-        assets_payload = payload.get("assets", [])
+        assets_payload = payload.get("assets") or []
+        if not assets_payload:
+            # Newer Immich versions no longer embed assets in the album response.
+            assets_payload = await self._search_album_assets(album_id)
         assets = [self._parse_asset(asset_payload) for asset_payload in assets_payload]
         album_order = str(payload.get("order", "")).strip().lower()
         if not sort_criteria and album_order in {"asc", "desc"}:
@@ -212,6 +215,35 @@ class ImmichClient:
         if not sort_criteria:
             self._album_assets_cache.set(cache_key, assets)
         return assets
+
+    async def _search_album_assets(self, album_id: str) -> list[dict[str, Any]]:
+        session = self._session
+        if session is None:
+            raise RuntimeError("Immich client not started.")
+        url = f"{self.settings.immich_url}/search/metadata"
+        items: list[dict[str, Any]] = []
+        page = 1
+        while page:
+            body = {"albumIds": [album_id], "page": page, "size": 1000, "withDeleted": False}
+            started_at = time.perf_counter()
+            try:
+                async with session.post(url, headers=self._headers(), json=body, ssl=self._ssl) as response:
+                    if response.status >= 400:
+                        details = (await response.text())[:250]
+                        self._observe_outgoing("/search/metadata", str(response.status), time.perf_counter() - started_at)
+                        self._record_immich_error()
+                        raise ImmichError(f"Immich POST /search/metadata failed: {response.status} {details}")
+                    payload = await response.json()
+                    self._observe_outgoing("/search/metadata", str(response.status), time.perf_counter() - started_at)
+            except (aiohttp.ClientError, asyncio.TimeoutError) as error:
+                self._observe_outgoing("/search/metadata", "error", time.perf_counter() - started_at)
+                self._record_immich_error()
+                raise ImmichError(str(error)) from error
+            assets = payload.get("assets", {})
+            items.extend(assets.get("items", []))
+            next_page = assets.get("nextPage")
+            page = int(next_page) if next_page else 0
+        return items
 
     async def list_timeline_asset_refs(self) -> list[tuple[str, bool]]:
         cached = self._timeline_refs_cache.get("timeline")

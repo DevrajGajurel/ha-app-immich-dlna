@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.13
+
+- Fix empty albums (UI and DLNA clients): load album assets via Immich `/search/metadata` when `/albums/{id}` no longer embeds assets (Immich 2.x).
+
 ## 0.1.12
 
 - Add a browsable web UI (Timeline / Albums, the same tree DLNA clients see) in the Home Assistant sidebar via ingress.
